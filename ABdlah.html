@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> game for sara </title>
+  <link rel="stylesheet" type="text/css" href="CCC.css">
+</head>
+
+<body>
+  <div class="content">
+  <h2> Memory game </h2>
+  <div class="game">
+  </div>
+  <button class="rest" onclick="window.location.reload();">Rest game</button>
+</div>
+
+<script>
+const letters = ["A","A","B","B","C","C","D","D","E","E","F","F","G","G","H","H","I","I","J","J","K","K","L","L","M","M","N","N","O","O","P","P","Q","Q","R","R","S","S","T","T","U","U","V","V","W","W","X","X","Y","Y","Z","Z"];
+var see_letters= letters.sort(() => (Math.random() > .5) ? 2 : -1);
+for (var i=0; i<letters.length; i++){
+  let box= document.createElement('div')
+  box.className='item';
+  box.innerHTML= see_letters[i]
+
+box.onclick = function(){
+  this.classList.add('boxOpen')
+  setTimeout(function(){
+if(document.querySelectorAll('.boxOpen').length > 1){
+  if(document.querySelectorAll('.boxOpen')[0].innerHTML ==
+    document.querySelectorAll('.boxOpen')[1].innerHTML){
+      document.querySelectorAll('.boxOpen')[0].classList.add('boxMatch')
+      document.querySelectorAll('.boxOpen')[1].classList.add('boxMatch')
+
+        document.querySelectorAll('.boxOpen')[1].classList.remove('boxOpen')
+        document.querySelectorAll('.boxOpen')[0].classList.remove('boxOpen')
+
+if(document.querySelectorAll('.boxMatch').length == letters.length){
+  alert('congratulation!! you win')
+}
+} else {
+  document.querySelectorAll('.boxOpen')[1].classList.remove('boxOpen')
+  document.querySelectorAll('.boxOpen')[0].classList.remove('boxOpen')
+ }
+}
+  },500)
+}
+
+
+  document.querySelector('.game').appendChild(box);
+}
+</script>
+</body>
+</html>
